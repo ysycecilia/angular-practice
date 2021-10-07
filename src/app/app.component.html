@@ -1,0 +1,16 @@
+<h4>Flopbuster Watch List</h4>
+
+<div>
+
+  <my-watch-list-item 
+    *ngFor='let w of watchList | slice : 0 : maxToShow; last as l; first as f; index as i'
+    [item]="w" [firstItem]="f" [lastItem]="l" [index]="i" 
+    (up)="swapIndexUp(i)" (down)="swapIndexDown(i)">
+  </my-watch-list-item>
+
+  <button class="btn btn-info" (click)="showAll()"
+          *ngIf="maxToShow < watchList.length">Show All</button> 
+
+</div>
+
+
