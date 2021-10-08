@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WATCH_LIST } from './DATA';
+import { WatchListService } from './watch-list.service';
 
 @Component({
   selector: 'my-app',
@@ -7,14 +7,18 @@ import { WATCH_LIST } from './DATA';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  watchList = WATCH_LIST
+  watchList = []
   maxToShow = 4;
-  ngOnInit(){
-    
-  }
-  constructor() {
-  }
 
+  constructor(private watchListService: WatchListService){
+  }
+  
+  ngOnInit(){
+    this.watchListService.getWatchList()
+        .subscribe(watchListData => {
+          this.watchList = watchListData;
+        })
+  }
 
   swapIndexUp(i){
     let temp = this.watchList[i];
